@@ -1,0 +1,69 @@
+\documentclass{article}
+
+% formato
+\usepackage[margin = 1.5cm, letterpaper]{geometry}
+\usepackage[utf8]{inputenc}
+
+%tablas
+\usepackage{graphicx}
+
+%formato ecuaciones
+\usepackage{amsmath}
+
+% símbolos
+\usepackage{amssymb}
+
+% manejo de tablas
+\usepackage{float}
+
+\begin{document}
+    \title{
+        Autómatas y Lenguajes formales \\
+        Ejercicio Semanal 9
+    }
+
+    \author{
+        Sandra del Mar Soto Corderi \\
+        Edgar Quiroz Castañeda
+    }
+
+    \date{
+        11 de abril del 2019
+    }
+    
+    \maketitle
+
+    \begin{enumerate}
+        \item {
+        Responde a los incisos con base en el siguiente lenguaje $L = \{a^nb^{2n} | n \in \mathbb{N}\}$
+        \begin{enumerate}
+        	\item {
+        	Demuestra que $L$ no es regular.\\
+        	
+        	Demostraremos que el lenguaje no es regular usando el conjunto estafador.
+        	
+        	Un conjunto infinito $S \subseteq \Sigma^*$ es un conjunto estafador para L si y sólo si $\forall x,y \in S (x \not\equiv_L y)$.\\
+        	
+        	Sea $S = \{ a^kb^k | k \in \mathbb{N}\}$, veamos que S es un conjunto estafador: Sean $a^nb^n , a^mb^m \in S \ \text{con} \ n \neq m$\\
+        	
+        	Tomemos $x = b^n$\\
+        	Por un lado tenemos $ a^nb^nb^n = a^nb^{2n} \in L$\\
+        	Por otra parte tenemos $a^mb^mb^n = a^mb^{m + n} \not \in L$\\
+        	Por lo tanto $a^nb^n \not\equiv_L a^mb^m$ y S es un conjunto estafador de L.\\
+        	
+        	Como pudimos encontrar un conjunto estafador de L, concluimos que L no es regular. $\blacksquare$\\
+        	
+        	}
+        	\item{
+        	Diseña un Autómata de Pila que acepte a $L$ con criterio de aceptación de estado final.\\
+        	
+        	
+        	}
+        	\item{
+        	Transforma el PDA del inciso anterior en uno con criterio de aceptación por pila vacía.
+        	
+        	}
+        \end{enumerate}
+    	}
+    \end{enumerate}
+\end{document}
