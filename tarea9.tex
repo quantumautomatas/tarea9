@@ -77,7 +77,7 @@
                 \centering
                 \begin{tikzpicture}[auto]
                     % estados del autómata
-                    \node [state, initial] (q0) {$q_{0}$};
+                    \node [state] (q0) {$q_{0}$};
                     \node [state] (q1) [right=of q0] {$q_{1}$};
                     \node [state] (q2) [right=of q1] {$q_{2}$};
                     \node [state, accepting] (q3) [right=of q2] {$q_{3}$};
@@ -86,6 +86,7 @@
                     \path[->]
                     (q0) edge [loop above] node {$a, \gamma / A\gamma$} (q0)
                          edge node {$b, A / A$} (q1)
+                         edge [bend right] node [below] {$\epsilon, Z_{0} / \epsilon$} (q3)
                     (q1) edge [bend right] node [below] {$b, A / \epsilon$} (q2)
                     (q2) edge node {$\epsilon, Z_{0} / \epsilon$} (q3)
                     (q2) edge [bend right] node [above] {$b, A / A$} (q1);
