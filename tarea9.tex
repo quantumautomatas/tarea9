@@ -2,7 +2,7 @@
 
 % formato
 \usepackage[margin = 1.5cm, letterpaper]{geometry}
-\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands]{babel}
 
 %tablas
 \usepackage{graphicx}
@@ -15,6 +15,10 @@
 
 % manejo de tablas
 \usepackage{float}
+
+% autómatas
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
 
 \begin{document}
     \title{
@@ -35,33 +39,66 @@
 
     \begin{enumerate}
         \item {
-        Responde a los incisos con base en el siguiente lenguaje $L = \{a^nb^{2n} | n \in \mathbb{N}\}$
+        Responde a los incisos con base en el siguiente lenguaje $L = 
+        \{a^nb^{2n} | n \in \mathbb{N}\}$
         \begin{enumerate}
         	\item {
         	Demuestra que $L$ no es regular.\\
-        	
-        	Demostraremos que el lenguaje no es regular usando el conjunto estafador.
-        	
-        	Un conjunto infinito $S \subseteq \Sigma^*$ es un conjunto estafador para L si y sólo si $\forall x,y \in S (x \not\equiv_L y)$.\\
-        	
-        	Sea $S = \{ a^kb^k | k \in \mathbb{N}\}$, veamos que S es un conjunto estafador: Sean $a^nb^n , a^mb^m \in S \ \text{con} \ n \neq m$\\
-        	
+            Demostraremos que el lenguaje no es regular usando el conjunto 
+            estafador.
+            Un conjunto infinito $S \subseteq \Sigma^*$ es un conjunto estafador
+            para L si y sólo si $\forall x,y \in S (x \not\equiv_L y)$.\\
+            Sea $S = \{ a^kb^k | k \in \mathbb{N}\}$, veamos que S es un 
+            conjunto estafador: Sean $a^nb^n , a^mb^m \in S \ \text{con} \ n 
+            \neq m$\\
         	Tomemos $x = b^n$\\
         	Por un lado tenemos $ a^nb^nb^n = a^nb^{2n} \in L$\\
         	Por otra parte tenemos $a^mb^mb^n = a^mb^{m + n} \not \in L$\\
-        	Por lo tanto $a^nb^n \not\equiv_L a^mb^m$ y S es un conjunto estafador de L.\\
-        	
-        	Como pudimos encontrar un conjunto estafador de L, concluimos que L no es regular. $\blacksquare$\\
-        	
+            Por lo tanto $a^nb^n \not\equiv_L a^mb^m$ y S es un conjunto 
+            estafador de L.\\
+            Como pudimos encontrar un conjunto estafador de L, concluimos que 
+            L no es regular. $\blacksquare$.
         	}
         	\item{
-        	Diseña un Autómata de Pila que acepte a $L$ con criterio de aceptación de estado final.\\
-        	
-        	
+            Diseña un Autómata de Pila que acepte a $L$ con criterio de 
+            aceptación de estado final.
+            \[M = \langle \{q_{0}, q_{1}, q_{2}, q_{3}\}, \{a, b\}, \{A, B\},
+            \delta, q_{0}, Z_{0}, \{q_{3}\}\rangle\]
+            Con $\delta$ dada por
+            \begin{align*}
+                &\delta(q_{0}, a, \gamma) = (q_{0}, \gamma) \\
+                &\delta(q_{0}, \epsilon, \gamma) = (q_{1}, \gamma) \\
+                &\delta(q_{1}, b, A) = (q_{2}, A) \\
+                &\delta(q_{1}, \epsilon, Z_{0}) = (q_{3}, \epsilon) \\
+                &\delta(q_{2}, b, A) = (q_{1}, \epsilon)
+            \end{align*}
+            Con representación gráfica|
+        	\begin{figure}[H]
+                \centering
+                \begin{tikzpicture}[auto]
+                    % estados del autómata
+                    \node [state, initial] (q0) {$q_{0}$};
+                    \node [state] (q1) [right=of q0] {$q_{1}$};
+                    \node [state] (q2) [right=of q1] {$q_{2}$};
+                    \node [state, accepting] (q3) [below=of q1] {$q_{3}$};
+                    
+                    % transiciones
+                    \path[->]
+                    (q0) edge [loop above] node {$a, \gamma / A\gamma$} (q0)
+                         edge node {$\epsilon, \gamma / \gamma$} (q1)
+                    (q1) edge [bend right] node [below] {$b, A / A$} (q2)
+                    (q1) edge node [left] {$\epsilon, Z_{0} / \epsilon$} (q3)
+                    (q2) edge [bend right] node [above] {$b, A / \epsilon$} (q1);
+                \end{tikzpicture}
+                \caption{Autómata que acepta a $L$ por estado final}
+                \label{fib:pda1}
+            \end{figure}
         	}
         	\item{
-        	Transforma el PDA del inciso anterior en uno con criterio de aceptación por pila vacía.
-        	
+            Transforma el PDA del inciso anterior en uno con criterio de 
+            aceptación por pila vacía.\\
+            $M$ ya acepta por pila vacía, así que la transformación del autómata
+            es sí mismo.
         	}
         \end{enumerate}
     	}
