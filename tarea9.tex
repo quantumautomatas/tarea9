@@ -78,7 +78,7 @@
                 \centering
                 \begin{tikzpicture}[auto]
                     % estados del autómata
-                    \node [state] (q0) {$q_{0}$};
+                    \node [state, initial] (q0) {$q_{0}$};
                     \node [state] (q1) [right=of q0] {$q_{1}$};
                     \node [state] (q2) [right=of q1] {$q_{2}$};
                     \node [state, accepting] (q3) [below=of q2] {$q_{3}$};
@@ -99,8 +99,19 @@
         	\item{
             Transforma el PDA del inciso anterior en uno con criterio de 
             aceptación por pila vacía.\\
-            $M$ ya acepta por pila vacía, así que la transformación del autómata
-            es sí mismo.
+            En $M$ la única manera de vaciar la pila es por medio de las
+            transiciones que llevan a $q_{3}$, pues son las únicas que quitan a
+            $Z_{0}$ de la pila.\\
+            Entonces, si se vacía la pila, se llega a $q_{3}$.
+            Pero $q_{3}$ es final, así que si una cadena vacía la pila, entonces
+            llega a un estado final, y la cadena está en $L(M)$.\\
+            Por otra parte, si se llegó a un estado final, la pila debe estar
+            vacía, pues las úniacs transiciones que llevan al estado final la
+            vacían. Así que si una cadena es aceptada por estado final, vacía la
+            pila y está en $V(M)$. Por lo tanto, el lenguaje aceptado por estado
+            final y por pila vacía es el mismo.\\
+            Por lo que $M$ ya acepta por pila vacía, por lo que la tranformación
+            de $M$ es sí mismo.
         	}
         \end{enumerate}
     	}
